@@ -3,15 +3,19 @@ package br.com.fernandobarbosa.jetnote
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.lifecycle.viewmodel.compose.viewModel
 import br.com.fernandobarbosa.jetnote.data.NoteDataSource
 import br.com.fernandobarbosa.jetnote.model.Note
 import br.com.fernandobarbosa.jetnote.screens.NoteScreen
 import br.com.fernandobarbosa.jetnote.ui.theme.JetNoteTheme
+import br.com.fernandobarbosa.jetnote.viewmodel.NoteViewModel
 
 @ExperimentalComposeUiApi
 class MainActivity : ComponentActivity() {
@@ -19,21 +23,22 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetNoteTheme {
-                val notes = remember {
-                    mutableStateListOf<Note>()
-                }
                 Surface(color = MaterialTheme.colors.background) {
-                    NoteScreen(
-                        notes = notes,
-                        onAddNote = {
-                            notes.add(it)
-                        },
-                        onRemoveNote = {
-                            notes.remove(it)
-                        }
-                    )
+                    val noteViewModel: NoteViewModel by viewModels()
+                    NotesApp(noteViewModel)
                 }
             }
         }
     }
+}
+
+@ExperimentalComposeUiApi
+@Composable
+fun NotesApp(noteViewModel: NoteViewModel = viewModel()) {
+    val notesList = noteViewModel.getAllNotes()
+    NoteScreen(
+        notes = notesList,
+        onAddNote = { noteViewModel.addNote(it) },
+        onRemoveNote = { noteViewModel.removeNote(it) }
+    )
 }
