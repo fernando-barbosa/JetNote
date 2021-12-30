@@ -7,17 +7,15 @@ import androidx.activity.viewModels
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.lifecycle.viewmodel.compose.viewModel
-import br.com.fernandobarbosa.jetnote.data.NoteDataSource
-import br.com.fernandobarbosa.jetnote.model.Note
 import br.com.fernandobarbosa.jetnote.screens.NoteScreen
 import br.com.fernandobarbosa.jetnote.ui.theme.JetNoteTheme
 import br.com.fernandobarbosa.jetnote.viewmodel.NoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 @ExperimentalComposeUiApi
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
