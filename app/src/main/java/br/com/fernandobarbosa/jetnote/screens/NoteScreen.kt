@@ -14,10 +14,15 @@ import br.com.fernandobarbosa.jetnote.R
 import br.com.fernandobarbosa.jetnote.components.NoteButton
 import br.com.fernandobarbosa.jetnote.components.NoteInputText
 import br.com.fernandobarbosa.jetnote.components.NoteTopAppBar
+import br.com.fernandobarbosa.jetnote.model.Note
 
 @ExperimentalComposeUiApi
 @Composable
-fun NoteScreen() {
+fun NoteScreen(
+    notes: List<Note>,
+    onAddNote: (Note) -> Unit,
+    onRemoveNote: (Note) -> Unit
+) {
     var title by remember {
         mutableStateOf("")
     }
@@ -28,7 +33,6 @@ fun NoteScreen() {
     Column() {
         NoteTopAppBar()
 
-        //Content
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -77,5 +81,5 @@ fun NoteScreen() {
 @Preview(showBackground = true)
 @Composable
 fun NoteScreenPreview() {
-    NoteScreen()
+    NoteScreen(notes = emptyList(), onAddNote = {}, onRemoveNote = {})
 }

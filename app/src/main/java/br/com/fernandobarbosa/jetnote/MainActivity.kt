@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             JetNoteTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    NoteScreen()
+                    NoteScreen(notes = emptyList(), onAddNote = {}, onRemoveNote = {})
                 }
             }
         }
