@@ -30,7 +30,7 @@ fun NoteRow(
     ) {
         Column(
             modifier
-                .clickable { }
+                .clickable { onNoteClick(note) }
                 .padding(horizontal = 14.dp, vertical = 6.dp)
         ) {
             Text(

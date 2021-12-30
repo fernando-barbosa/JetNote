@@ -24,11 +24,13 @@ class MainActivity : ComponentActivity() {
                 }
                 Surface(color = MaterialTheme.colors.background) {
                     NoteScreen(
-                        notes = NoteDataSource().loadNotes(),
+                        notes = notes,
                         onAddNote = {
                             notes.add(it)
                         },
-                        onRemoveNote = {}
+                        onRemoveNote = {
+                            notes.remove(it)
+                        }
                     )
                 }
             }
