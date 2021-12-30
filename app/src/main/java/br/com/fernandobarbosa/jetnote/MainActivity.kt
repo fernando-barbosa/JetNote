@@ -5,7 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
+import br.com.fernandobarbosa.jetnote.data.NoteDataSource
+import br.com.fernandobarbosa.jetnote.model.Note
 import br.com.fernandobarbosa.jetnote.screens.NoteScreen
 import br.com.fernandobarbosa.jetnote.ui.theme.JetNoteTheme
 
@@ -15,8 +19,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetNoteTheme {
+                val notes = remember {
+                    mutableStateListOf<Note>()
+                }
                 Surface(color = MaterialTheme.colors.background) {
-                    NoteScreen(notes = emptyList(), onAddNote = {}, onRemoveNote = {})
+                    NoteScreen(
+                        notes = NoteDataSource().loadNotes(),
+                        onAddNote = {
+                            notes.add(it)
+                        },
+                        onRemoveNote = {}
+                    )
                 }
             }
         }

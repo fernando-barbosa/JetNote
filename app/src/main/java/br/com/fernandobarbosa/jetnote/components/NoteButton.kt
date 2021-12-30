@@ -5,6 +5,8 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.toUpperCase
+import java.util.*
 
 @Composable
 fun NoteButton(
@@ -19,6 +21,6 @@ fun NoteButton(
         enabled = enabled,
         modifier = modifier
     ) {
-        Text(text = text)
+        Text(text = text.uppercase(Locale.getDefault()))
     }
 }
